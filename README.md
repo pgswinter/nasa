@@ -14,7 +14,8 @@ Code run a both frontend and backend:
 
 ### yarn run dev
 
-## Frontend created inside client folder. Made by create-react-app.
+## Frontend created inside client folder. Frontend was created by webpack builder and config by myself.
+## Using debounce to imporve UX when user use search
 
 BACKEND run on localhost:5555. Start up by:
 
@@ -22,9 +23,11 @@ BACKEND run on localhost:5555. Start up by:
 
 FRONTEND run on localhost:3000 Start up by:
 
+## Project was deploy to domain: https://hidden-sierra-14555.herokuapp.com/ by Heroku
+
 ## yarn start
 
 ## Project created cover the frontend too. I used concurrently to run 2 parts at the same time
-## Integrated backend port with frontend inside package.json of "client" folder. 
+## Integrated backend port by package.json inside "client" folder. 
 
 "proxy": "http://localhost:5555",

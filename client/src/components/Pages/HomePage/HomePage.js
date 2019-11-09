@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-// import debounce from '../../../util/debounce';
-// import { debounce } from 'lodash';
 import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 

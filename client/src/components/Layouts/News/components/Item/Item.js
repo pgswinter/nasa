@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import ImageLoader from 'react-imageloader';
 //import { Test } from './Item.styles';
+
+import loading from '../../../../../images/loading.gif';
 
 import {
   formState,
@@ -17,6 +20,9 @@ import {
 class Item extends Component {
   state = formState;
 
+  preloader = () => {
+    return <img src={loading} alt="loading" />;
+  }
   onHandleLike = (id) => {
     this.props.handleLike(id);
   }
@@ -147,7 +153,12 @@ class Item extends Component {
             <React.Fragment>
               <div className="head__itemWrap">
                 <div className="imgWrap">
-                  <img src={media} alt="" />
+                  <ImageLoader
+                    src={media}
+                    wrapper={React.createFactory('div')}
+                    preloader={this.preloader}>
+                    Image load failed!
+                  </ImageLoader>
                 </div>
                 <p>{moment(date_created).format("MMM Do YYYY") || moment(new Date()).format("MMM Do YYYY")}</p>
                 <h2>
