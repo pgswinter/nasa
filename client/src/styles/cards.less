@@ -1,0 +1,117 @@
+.cards {
+    margin-top: 30px;
+    display   : -ms-flexbox;
+    display   : flex;
+    flex-wrap : wrap;
+
+    .card-info__card {
+        flex          : 0 0 calc(33% - 30px);
+        overflow      : hidden;
+        flex-direction: column;
+        padding       : 15px;
+        min-height    : 546px;
+
+        .editting {
+
+            input,
+            textarea {
+                width        : 100%;
+                padding      : 15px 0;
+                text-indent  : 15px;
+                border       : none;
+                font-size    : 1.3em;
+                border-bottom: 1px solid @borderButton;
+            }
+        }
+
+        .head__itemWrap {
+            .imgWrap {
+                height       : 208px;
+                overflow     : hidden;
+                border-radius: 5px;
+                box-shadow   : 0 19px 22px -15px @boxShadow;
+
+                img {
+                    width: 100%;
+
+                }
+            }
+
+            p {
+                margin-top: 30px;
+                color     : @description;
+                text-align: right;
+                font-size : 14px;
+            }
+
+            h2 {
+                color         : @title;
+                margin-top    : 20px;
+                font-size     : 24px;
+                font-weight   : 900;
+                text-transform: uppercase;
+            }
+
+
+
+        }
+
+        .body__itemWrap {
+            p {
+                width        : 100%;
+                margin-top   : 30px;
+                color        : @description;
+                line-height  : 1.5em;
+                height       : 90px;
+                overflow     : hidden;
+                text-overflow: ellipsis;
+                font-size    : 15px;
+                position     : relative;
+                z-index      : 1;
+
+                &:after {
+                    content         : '...';
+                    text-align      : left;
+                    text-indent     : 5px;
+                    background-color: #fff;
+                    font-size       : 1.5em;
+                    font-weight     : 900;
+                    display         : block;
+                    position        : absolute;
+                    right           : 0;
+                    bottom          : -5px;
+                    width           : 60px;
+                    height          : 30px;
+                }
+            }
+
+            .footer__body {
+                margin-top: 15px;
+
+                button {
+                    width        : 48px;
+                    height       : 48px;
+                    border       : 1px solid @borderButton;
+                    border-radius: 5px;
+                    font-size    : 1.5em;
+                    color        : @borderButton;
+                    margin-right : 15px;
+
+                    i {
+                        &.fas.fa-heart {
+                            color: @heart;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .cards {
+        .card-info__card {
+            flex: 0 0 calc(100% - 30px);
+        }
+    }
+}
