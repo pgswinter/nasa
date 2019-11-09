@@ -8,6 +8,7 @@
     "api": "cross-env NODE_ENV=development nodemon --exec babel-node app.js",
     "client": "yarn --cwd client start",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-prebuild": "npm install --dev",
     "start": "yarn prod",
     "prod": "NODE_ENV=production babel-node app.js"
   },
