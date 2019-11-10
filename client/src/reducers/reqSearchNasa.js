@@ -1,4 +1,6 @@
 /* eslint-disable no-case-declarations */
+import moment from 'moment';
+
 import {
     REQUEST_LIKE_FRONT,
     REQUEST_ADD_FRONT,
@@ -6,14 +8,23 @@ import {
     REQUEST_CANCEL_EDIT,
     REQUEST_EDIT_FRONT,
     REQUEST_DELETE_FRONT,
+
     REQUEST_FILTER_FAVOURITE_FRONT,
     REQUEST_CANCEL_FILTER_FAVOURITE,
+
     REQUEST_SORT_DATE_FRONT,
+    REQUEST_SORT_DESC_DATE_FRONT,
+    // REQUEST_CANCEL_SORT_DATE,
+
+    REQUEST_SORT_TITLE_FRONT,
+    // REQUEST_CANCEL_SORT_TITLE,
+
+    REQUEST_FILTER_DATE_FRONT,
+    // REQUEST_CANCEL_FILTER_DATE,
 
     REQUEST_SEARCH_NASA,
     REQUEST_SEARCH_NASA_SUCCESS,
     REQUEST_SEARCH_NASA_FAIL,
-    REQUEST_CANCEL_SORT_DATE,
 } from '../actions/nasa/actionTypes';
 
 export let defaultData = {}
@@ -32,6 +43,88 @@ export default function (state = initialState, action) {
                 loading: true,
                 isLoaded: false
             }
+        case REQUEST_SORT_TITLE_FRONT:
+            const sortTitleData = state.data;
+            
+            const newSortTitleData = sortTitleData.sort((a, b) => {
+                const nameA = a.data.title.charAt(0) === " " ? a.data.title.slice(1).charAt(0).toUpperCase() : a.data.title.charAt(0).toUpperCase();
+                const nameB = b.data.title.charAt(0) === " " ? b.data.title.slice(1).charAt(0).toUpperCase() : b.data.title.charAt(0).toUpperCase();
+                return nameA.localeCompare(nameB)
+
+                // if (nameA < nameB) {
+                //     return -1;
+                // }
+                // if (nameA > nameB) {
+                //     return 1;
+                // }
+                // return 0;
+            })
+            return {
+                ...state,
+                loading: false,
+                data: newSortTitleData,
+                isLoaded: true,
+                isChanged: true,
+                isSortByTitle: true,
+            }
+        // case REQUEST_CANCEL_SORT_TITLE:
+        //     const sortTitleReverseData = state.data;
+        //     const newSortReverseTitleData = sortTitleReverseData.sort((a, b) => {
+        //         const nameA = a.data.title.charAt(0).toUpperCase();
+        //         const nameB = b.data.title.charAt(0).toUpperCase();
+        //         if (nameA > nameB) {
+        //             return -1;
+        //         }
+        //         if (nameA < nameB) {
+        //             return 1;
+        //         }
+        //         return 0;
+        //     })
+        //     return {
+        //         ...state,
+        //         loading: false,
+        //         data: newSortReverseTitleData,
+        //         isLoaded: true,
+        //         isSortByTitle: true,
+        //     }
+        case REQUEST_FILTER_DATE_FRONT:
+            const filterDateData = state.data;
+            const dateParams = action.params;
+
+            const newFilterDateData = filterDateData.filter(item => {
+                const itemDateData = moment(item.data.date_created).format('L');
+                if (itemDateData === dateParams) {
+                    return item
+                }
+            });
+            return {
+                ...state,
+                loading: false,
+                data: newFilterDateData,
+                isLoaded: true,
+                isFilteredByDate: true,
+            }
+        // case REQUEST_CANCEL_FILTER_DATE:
+        //     const beforeFilterByDate = action.params;
+        //     return {
+        //         ...state,
+        //         loading: false,
+        //         data: beforeFilterByDate,
+        //         isLoaded: true,
+        //         isFilteredByDate: false,
+        //     }
+        case REQUEST_SORT_DESC_DATE_FRONT:
+            const sortDateDescData = state.data;
+            const newSortDateDescData = sortDateDescData.sort((a, b) => {
+                return new Date(b.data.date_created) - new Date(a.data.date_created)
+            })
+            return {
+                ...state,
+                loading: false,
+                data: newSortDateDescData,
+                isLoaded: true,
+                isSortedByDescDate: true,
+            }
         case REQUEST_SORT_DATE_FRONT:
             const sortData = state.data;
             const newSortData = sortData.sort((a, b) => {
@@ -44,18 +137,18 @@ export default function (state = initialState, action) {
                 isLoaded: true,
                 isSortedByDate: true,
             }
-        case REQUEST_CANCEL_SORT_DATE:
-            const sortReverseData = state.data;
-            const newSortReverseData = sortReverseData.sort((a, b) => {
-                return new Date(b.data.date_created) - new Date(a.data.date_created)
-            })
-            return {
-                ...state,
-                loading: false,
-                data: newSortReverseData,
-                isLoaded: true,
-                isSortedByDate: false,
-            }
+        // case REQUEST_CANCEL_SORT_DATE:
+        //     const sortReverseData = state.data;
+        //     const newSortReverseData = sortReverseData.sort((a, b) => {
+        //         return new Date(b.data.date_created) - new Date(a.data.date_created)
+        //     })
+        //     return {
+        //         ...state,
+        //         loading: false,
+        //         data: newSortReverseData,
+        //         isLoaded: true,
+        //         isSortedByDate: false,
+        //     }
         case REQUEST_FILTER_FAVOURITE_FRONT:
             const filterFavouriteData = state.data;
             const newFavouriteData = filterFavouriteData.filter(item => item.data.isLiked === true);
@@ -188,7 +281,12 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: false,
                 data: defaultData,
-                isLoaded: true
+                isLoaded: true,
+                isFilteredByFavourite: false,
+                isSortedByDate: false,
+                isFilteredByDate: false,
+                isSortByTitle: false,
+                isSortedByDescDate: false,
             }
         case REQUEST_SEARCH_NASA_FAIL:
             return {

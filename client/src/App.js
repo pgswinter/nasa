@@ -13,6 +13,7 @@ import {
 
 import './styles/index.less';
 import './styles/fontawesome/css/all.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 class App extends Component {
     constructor(props) {

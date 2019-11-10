@@ -29,11 +29,28 @@
                 height       : 208px;
                 overflow     : hidden;
                 border-radius: 5px;
-                box-shadow   : 0 19px 22px -15px @boxShadow;
+                box-shadow   : 0 19px 40px -30px @boxShadow;
+                transition   : all 0.5s;
+                cursor       : pointer;
+                position     : relative;
+
+                &:hover {
+                    box-shadow: 0 19px 22px -15px @boxShadow;
+                }
 
                 img {
                     width: 100%;
 
+                }
+
+                .audio {
+                    font-size     : 3em;
+                    font-weight   : 100;
+                    text-align    : center;
+                    text-transform: uppercase;
+                    position      : absolute;
+                    color         : @h1;
+                    .center-abs;
                 }
             }
 

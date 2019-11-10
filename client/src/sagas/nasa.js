@@ -21,9 +21,10 @@ import api from '../services/api';
 function* reqSearchNasa(params) {
     try {
         const { data } = yield call(() => api.Nasa.search(params.params));
-        const { collection: { items } } = data;
+        const { collection: { items, metadata } } = data;
 
         let newData = [];
+        
         for (let i = 0; i < items.length; i++) {
             try {
                 // const mediaData = yield call(() => api.Nasa.getJson(items[i].href));
@@ -36,6 +37,7 @@ function* reqSearchNasa(params) {
                 console.log(error);
             }
         }
+        newData['total'] = metadata.total_hits;
         yield put(reqSearchNasaSuccess(newData));
     } catch (error) {
         console.log(error);

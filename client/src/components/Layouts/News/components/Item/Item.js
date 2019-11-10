@@ -153,12 +153,16 @@ class Item extends Component {
             <React.Fragment>
               <div className="head__itemWrap">
                 <div className="imgWrap">
-                  <ImageLoader
-                    src={media}
-                    wrapper={React.createFactory('div')}
-                    preloader={this.preloader}>
-                    Image load failed!
-                  </ImageLoader>
+                  {media ?
+                    <ImageLoader
+                      src={media}
+                      wrapper={React.createFactory('div')}
+                      preloader={this.preloader}>
+                      Image load failed!
+                  </ImageLoader> :
+                    <label className="audio">Audio</label>
+                  }
+
                 </div>
                 <p>{moment(date_created).format("MMM Do YYYY") || moment(new Date()).format("MMM Do YYYY")}</p>
                 <h2>

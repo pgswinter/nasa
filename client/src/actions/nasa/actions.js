@@ -5,13 +5,22 @@ import {
     REQUEST_CANCEL_EDIT,
     REQUEST_EDIT_FRONT,
     REQUEST_DELETE_FRONT,
-    REQUEST_FILTER_TYPE_FRONT,
+    
+    REQUEST_FILTER_TYPE,
+
     REQUEST_FILTER_DATE_FRONT,
+    REQUEST_CANCEL_FILTER_DATE,
+
     REQUEST_FILTER_FAVOURITE_FRONT,
     REQUEST_CANCEL_FILTER_FAVOURITE,
+
     REQUEST_SORT_TITLE_FRONT,
+    REQUEST_CANCEL_SORT_TITLE,
+
     REQUEST_SORT_DATE_FRONT,
+    REQUEST_SORT_DESC_DATE_FRONT,
     REQUEST_CANCEL_SORT_DATE,
+    
     REQUEST_PAGINATION_FRONT,
 
     REQUEST_SEARCH_NASA,
@@ -76,9 +85,9 @@ export const reqDeleteFront = (params) => {
 // *********************************************************
 // REQUEST FILTER TYPE FRONT
 // *********************************************************
-export const reqFilterTypeFront = (params) => {
+export const reqFilterType = (params) => {
     return {
-        type: REQUEST_FILTER_TYPE_FRONT,
+        type: REQUEST_FILTER_TYPE,
         params
     }
 }
@@ -88,6 +97,15 @@ export const reqFilterTypeFront = (params) => {
 export const reqFilterDateFront = (params) => {
     return {
         type: REQUEST_FILTER_DATE_FRONT,
+        params
+    }
+}
+// *********************************************************
+// REQUEST CANCEL FILTER DATE
+// *********************************************************
+export const reqCancelFilterDate = (params) => {
+    return {
+        type: REQUEST_CANCEL_FILTER_DATE,
         params
     }
 }
@@ -119,11 +137,29 @@ export const reqSortTitleFront = (params) => {
     }
 }
 // *********************************************************
+// REQUEST CANCEL SORT TITLE
+// *********************************************************
+export const reqCancelSortTitle = (params) => {
+    return {
+        type: REQUEST_CANCEL_SORT_TITLE,
+        params
+    }
+}
+// *********************************************************
 // REQUEST SORT DATE FRONT
 // *********************************************************
 export const reqSortDateFront = (params) => {
     return {
         type: REQUEST_SORT_DATE_FRONT,
+        params
+    }
+}
+// *********************************************************
+// REQUEST SORT DATE DESC FRONT
+// *********************************************************
+export const reqSortDescDateFront = (params) => {
+    return {
+        type: REQUEST_SORT_DESC_DATE_FRONT,
         params
     }
 }

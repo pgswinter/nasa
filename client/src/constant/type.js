@@ -1,0 +1,1 @@
+export const typeData = ["image","video","audio","all"];
